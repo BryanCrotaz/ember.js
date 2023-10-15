@@ -146,6 +146,20 @@ interface ComponentMethods {
     */
 
   /**
+    Note that elementId is not useful when using Ember Octane components which 
+    are tagless. Instead you should use `guidFor(this)`, for example:
+    ```js
+      import Component from '@glimmer/component';
+      import { guidFor } from '@ember/object/internals';
+      
+      export default class InputTextComponent extends Component {
+        inputId = 'textInput-' + guidFor(this); 
+      }
+    ```
+    ```handlebars
+      <input id={{this.inputId}} ... />
+    ```
+    
     The HTML `id` of the component's element in the DOM. You can provide this
     value yourself but it must be unique (just as in HTML):
 
